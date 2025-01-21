@@ -1,0 +1,70 @@
+pipeline {
+    agent any
+    environment
+    {
+    name='gaurav'    
+    }
+    parameters
+    {
+    string(name:'person',defaultValue:'Saurav Sharma',description:"Who are you")
+    booleanParam(name:'isMale',defaultValue:true,description:"")
+    }
+    stages 
+    {
+        stage('Run A Command ') 
+        {
+            steps {
+               
+                sh 'ls'
+                sh 'pwd'
+            }
+        }
+    
+     stage('Enviornment Variables')   
+     {
+    environment
+    {
+    name='preet'    
+    }
+         steps
+         {
+             sh 'echo "${BUILD_ID}"'
+             sh 'echo "${name}"'
+         }
+     }
+     
+     stage('Parameters')   
+     {
+   
+         steps
+         {
+             sh 'echo "${name}"'
+             sh 'echo "${person}"'
+         }
+     }
+
+
+stage('Continue ?')   
+     {
+   input
+   {
+    message "Should We Continue"
+    ok "Yes we Should"
+   }
+         steps
+         {
+        echo "display on proad"
+         }
+     }
+     
+     
+}
+}
+
+     
+     
+     
+    
+    
+
+
